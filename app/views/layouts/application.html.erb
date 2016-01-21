@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meetme</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.8/jquery.timepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+ 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.8/jquery.timepicker.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+<%= yield %>
+</div>
+<script>
+$( document ).ready(function(){
+	$(".button-collapse").sideNav();
+	$('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 15
+  });
+  $('.timepicker').timepicker();
+})
+</script>
+</body>
+</html>

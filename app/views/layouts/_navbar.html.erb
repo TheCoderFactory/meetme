@@ -1,0 +1,32 @@
+<nav class="light-blue lighten-2">
+  <div class="nav-wrapper container">
+    <a href="#!" class="brand-logo">Logo</a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+      <% if user_signed_in? %>
+        <% if current_user.profile %>
+          <li>
+            <%= link_to profile_path(current_user.profile) do %>
+              <%= image_tag current_user.profile.image, width: '40px', class: 'circle left' %> <%= current_user.profile.full_name %>
+            <% end %>
+          </li>
+        <% end %>
+        <li>
+          <%= link_to '<i class="material-icons">exit_to_app</i>'.html_safe, destroy_user_session_path, method: :delete %>
+        </li>
+      <% else %>
+        <li><%= link_to 'Sign in', new_user_session_path %></li>
+      <% end %>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+  </div>
+</nav>  

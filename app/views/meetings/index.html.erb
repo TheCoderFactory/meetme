@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Upcoming Meetings</h1>
+
+<div class="row">
+  <div class="col m8">
+    <ul class="collection">
+      <% @meetings.each do |meeting| %>
+        <li class="collection-item avatar">
+          <img src="<%= User.find(meeting.organiser_id).profile.image %>" class="circle">
+          <span class="title"><%= meeting.name %></span>
+          <p><%= meeting.reason %></p>
+          <a href="<%= meeting_path(meeting) %>" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col m4">
+    <div class="collection with-header">
+      <% @tags = Meeting.tag_counts_on(:tags) %>
+      <% @tags.each do |tag| %>
+        <a href="<%= meetings_path(tag: tag.name) %>" class="collection-item <%= 'green lighten-4' if tag.name == params[:tag] %>"> <%= tag.name %> <span class="badge"><%= tag.taggings_count %></span> </a>
+      <% end %>
+      <a href="/meetings" class="collection-item <%= 'green lighten-4' if params[:tag].blank? %>">All meetings</a>
+      
+      <%= link_to "Create Meeting", new_meeting_path, class: 'collection-item' %>
+    </div>
+  </div>
+</div>
+

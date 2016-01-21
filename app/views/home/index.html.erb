@@ -1,0 +1,23 @@
+<h1>Meet Me</h1>
+<p>Meetings made easy</p>
+
+
+
+<div class="row">
+	<div class="col m6">
+		<% if user_signed_in? %>
+			Show stuff
+		<% else %>
+			<%= link_to 'Create meeting', new_user_session_path, class: 'btn' %>
+		<% end %>
+	</div>
+	<div class="col m6">
+		<% if user_signed_in? %>
+			<div class="card">
+				<div class="card-content">
+					<%= render 'meetings/form' %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
