@@ -6,7 +6,13 @@
 <div class="row">
 	<div class="col m6">
 		<% if user_signed_in? %>
-			Show stuff
+			<h3>Meetings I've organised</h3>
+			<%= render @my_meetings, as: :elephant %>
+
+			
+			<h3>Meetings I'm invited to</h3>
+			<%= render @meetings %>
+
 		<% else %>
 			<%= link_to 'Create meeting', new_user_session_path, class: 'btn' %>
 		<% end %>

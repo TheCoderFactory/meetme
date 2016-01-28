@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :profiles
-  resources :meetings
+  resources :meetings do
+    member do
+      get :invite_to, :uninvite_to
+    end
+  end
   devise_for :users
   get 'home/index'
 

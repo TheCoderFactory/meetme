@@ -1,5 +1,7 @@
 class Meeting < ActiveRecord::Base
-
+	has_many :attendees
+	has_many :users, through: :attendees
+	
 	validates :name, :reason, :street, :suburb, :state, :postcode, presence: true
 	# validate :date_must_be_in_future
 
@@ -16,5 +18,9 @@ class Meeting < ActiveRecord::Base
 		if date.present? && date < Date.today
 			errors.add(:date, "Can't be in the past")
 		end
+	end
+
+	def self.in_future
+		where('date >= ?',  Date.today)
 	end
 end

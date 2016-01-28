@@ -1,0 +1,19 @@
+<h1>You have been invited to a meeting!</h1>
+
+<p>
+  Hi <%= @user.first_name %>,
+</p>
+
+<p>Here are your meeting details:</p>
+
+<ul>
+	<li>Title: <%= @meeting.name %></li>
+	<li>When: <%= @meeting.date.strftime('%d %b %Y') %></li>
+	<li>Where: <%= @meeting.full_street_address %></li>
+</ul>
+
+<p><%= link_to "Go to meeting page", meeting_url(@meeting) %></p>
+
+<p>See you there!</p>
+
+

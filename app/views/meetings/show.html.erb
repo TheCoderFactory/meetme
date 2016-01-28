@@ -27,7 +27,13 @@
             <% unless user.id == @organiser.id %>
               <tr>
                 <th><%= user.first_name + ' ' + user.last_name %></th>
-                <td>INVITE</td>
+                <td>
+                  <% if @meeting.users.include?(user) %>
+                    <%= link_to 'UnINVITE', uninvite_to_meeting_path(@meeting, user_id: user.id), class: 'btn orange' %>
+                  <% else %>
+                    <%= link_to 'INVITE', invite_to_meeting_path(@meeting, user_id: user.id), class: 'btn' %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           <% end %>

@@ -1,5 +1,19 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :set_meeting, only: [:uninvite_to, :invite_to, :show, :edit, :update, :destroy]
+
+  def uninvite_to
+    @user = User.find(params[:user_id])
+    @meeting.users.delete(@user)
+    redirect_to :back
+  end
+
+  def invite_to
+    @user = User.find(params[:user_id])
+    @meeting.users << @user
+    InviteMailer.invited(@user.id, @meeting.id).deliver_now!
+    redirect_to :back
+  end
+
 
   # GET /meetings
   # GET /meetings.json
@@ -33,6 +47,7 @@ class MeetingsController < ApplicationController
   def create
     @meeting = Meeting.new(meeting_params)
     @meeting.organiser_id = current_user.id
+
     respond_to do |format|
       if @meeting.save
         format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
