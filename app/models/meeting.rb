@@ -2,11 +2,12 @@ class Meeting < ActiveRecord::Base
 	has_many :attendees
 	has_many :users, through: :attendees
 	
+
 	validates :name, :reason, :street, :suburb, :state, :postcode, presence: true
 	# validate :date_must_be_in_future
 
 	acts_as_taggable
-
+	acts_as_votable
 	geocoded_by :full_street_address
 	after_validation :geocode
 

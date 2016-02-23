@@ -7,9 +7,9 @@
 	<div class="col m6">
 		<% if user_signed_in? %>
 			<h3>Meetings I've organised</h3>
-			<%= render @my_meetings, as: :elephant %>
+			<%= render @my_meetings %>
 
-			
+			<%= current_user %>
 			<h3>Meetings I'm invited to</h3>
 			<%= render @meetings %>
 

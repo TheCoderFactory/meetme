@@ -1,5 +1,15 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:uninvite_to, :invite_to, :show, :edit, :update, :destroy]
+  before_action :set_meeting, only: [:like, :unlike, :uninvite_to, :invite_to, :show, :edit, :update, :destroy]
+
+  def like
+    @meeting.liked_by current_user
+    redirect_to :back
+  end
+
+  def unlike
+    @meeting.unliked_by current_user
+    redirect_to :back
+  end
 
   def uninvite_to
     @user = User.find(params[:user_id])
@@ -10,7 +20,7 @@ class MeetingsController < ApplicationController
   def invite_to
     @user = User.find(params[:user_id])
     @meeting.users << @user
-    InviteMailer.invited(@user.id, @meeting.id).deliver_now!
+    InviteEmailJob.perform_async(@user.id, @meeting.id)
     redirect_to :back
   end
 

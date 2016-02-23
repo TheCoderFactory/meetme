@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
+  get 'admin', to: 'admin#index'
+
   resources :profiles
+  resources :charges
   resources :meetings do
     member do
       get :invite_to, :uninvite_to
+      get :like, :unlike
     end
   end
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+  resources :users do
+      member do
+        get :following, :followers
+      end
+  end
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  resources :relationships, only: [:create, :destroy]
   get 'home/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

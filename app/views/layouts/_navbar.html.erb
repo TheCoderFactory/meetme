@@ -8,6 +8,11 @@
       <li><a href="collapsible.html">Javascript</a></li>
       <li><a href="mobile.html">Mobile</a></li>
       <% if user_signed_in? %>
+        <% if current_user.has_role? :admin %>
+          <li>
+            <%= link_to 'Admin', admin_path %>
+          </li>
+        <% end %>
         <% if current_user.profile %>
           <li>
             <%= link_to profile_path(current_user.profile) do %>
@@ -29,4 +34,4 @@
       <li><a href="mobile.html">Mobile</a></li>
     </ul>
   </div>
-</nav>  
+</nav>

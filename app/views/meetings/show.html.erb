@@ -14,6 +14,13 @@
         <p><%= @meeting.full_street_address %></p>     
       </div>
     </div>
+    <% if current_user.voted_for? @meeting %>
+      <%= link_to "Unlike", unlike_meeting_path(@meeting), class: 'btn red' %>
+    <% else %>
+      <%= link_to "Like", like_meeting_path(@meeting), class: 'btn' %>
+    <% end %>
+
+
   </div>
   <div class="col m4">
     <div class="card">
